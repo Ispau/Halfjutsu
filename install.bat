@@ -126,12 +126,16 @@ if exist "data\licence_accepted.txt" (
   echo       Already accepted.
 ) else (
   echo.
-  echo  Viggle-Animate is derived from MiniMax H3 and has its own licence, which you
-  echo  must read and accept before downloading. Its standard grant EXCLUDES some
-  echo  regions ^(among them the EU, UK, USA and South Korea^): check that you may use it
-  echo  where you live. Halfjutsu's own code is MIT; the model is not.
+  echo  Viggle-Animate is derived from MiniMax H3 and is licensed under the MiniMax H3
+  echo  Community License, which you must read and accept before downloading.
   echo.
-  echo    Model page and licence: https://huggingface.co/Viggle/Viggle-Animate
+  echo  IMPORTANT: that licence is NOT granted in the European Union, the United Kingdom,
+  echo  the Republic of Korea or the United States of America. There it authorises neither
+  echo  using the model nor using or showing its outputs. Do not continue if you are in one
+  echo  of those territories, unless MiniMax has given you a licence.
+  echo  Halfjutsu's own code is MIT; the model is not.
+  echo.
+  echo    Licence: https://huggingface.co/Viggle/Viggle-Animate/blob/main/LICENSE
   echo    WanGP licence:          vendor\WanGP\LICENSE.txt
   echo.
   set "ANSWER="

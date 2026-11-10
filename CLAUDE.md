@@ -32,6 +32,7 @@ WanGP is started with `--attention sage2 --profile 5 --max-ram 24` (see `best_at
 - `measure_lag()` correlates motion (frame differences on a 4×4 grid) and only reports a
   lag that clearly beats 0; outputs are realigned with it.
 - Lip sync: soundtrack → `audio_guide` + `audio_prompt_type="A"` (experimental in Viggle).
+- **Licence:** Viggle-Animate = MiniMax H3 Community License, NOT granted in EU, UK, Republic of Korea, USA (model or outputs). Keep the README top notice and the installer prompt.
 - **Long clips:** chaining sliding windows compounds artefacts (visible from ~8 s). Clips
   > 124 frames are split into independent 124-frame chunks, all on the uploaded edited
   frame, overlapping by `CUT_MARGIN`=24; `join_hard_cuts()` cuts at the least different

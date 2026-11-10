@@ -7,6 +7,17 @@ the person. Halfjutsu carries that edit through the whole clip with
 camera move and (optionally) the mouth movement of the soundtrack. Everything runs on your
 own PC: no cloud, no uploads.
 
+> [!CAUTION]
+> **Model licence – territorial restriction.** Halfjutsu's code is MIT, but the model it runs,
+> Viggle-Animate, is a derivative of MiniMax H3 under the
+> [MiniMax H3 Community License](https://huggingface.co/Viggle/Viggle-Animate/blob/main/LICENSE).
+> That licence is granted **only outside its "Excluded Territories": the European Union, the
+> United Kingdom, the Republic of Korea and the United States of America.** Inside those
+> territories it does not authorise using, reproducing, modifying, distributing or displaying the
+> model **or its outputs**, for any purpose. MiniMax invites people there to contact them for a
+> licence. This repository does not include or redistribute any model weights; you download them
+> yourself and you are responsible for complying with that licence and its Acceptable Use Policy.
+
 ![Halfjutsu main screen: source video, frame to edit and Viggle settings](docs/images/form.png)
 
 > Tested on **one** configuration: Windows 11, RTX 5080 16 GB, 32 GB RAM. Other 16 GB+
@@ -145,9 +156,11 @@ known pitfalls). This is optional; `install.bat` works on its own.
   [WanGP Community License](https://github.com/deepbeepmeep/WanGP/blob/main/LICENSE.txt) –
   free to use, not to sell or embed in paid products.
 - **Viggle-Animate / MiniMax H3 weights** (downloaded by you, not included here): their own
-  licence on the [model page](https://huggingface.co/Viggle/Viggle-Animate). Its standard
-  grant **excludes some regions (among them the EU, UK, USA and South Korea)**. You are
-  responsible for checking that you may use the model where you live and for what you do.
+  [MiniMax H3 Community License](https://huggingface.co/Viggle/Viggle-Animate/blob/main/LICENSE).
+  It is **not granted in the European Union, the United Kingdom, the Republic of Korea or the
+  United States of America**, where it covers neither the model nor its outputs (see the notice
+  at the top). Elsewhere it comes with an Acceptable Use Policy (no impersonation without
+  consent, AI-generated content must be disclosed, …). You are responsible for complying.
 
 Halfjutsu does not redistribute any model weights.
 
