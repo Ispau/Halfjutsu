@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halfjutsu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- ============================ INTRO ============================ -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-bg"><div class="intro-grid"></div><div class="vignette"></div></div>
+  <div class="stage" id="stage">
+    <div class="ground-shadow" id="shadow"></div>
+    <div class="speedlines" id="speedlines"></div>
+    <div class="ninja-wrap" id="ninja"></div>
+    <div class="burst" id="burst"></div>
+    <div class="flash" id="flash"></div>
+  </div>
+  <div class="intro-type">
+    <div class="intro-kicker" id="kicker">HALFJOURNEY LAB PRESENTS</div>
+    <h1 class="intro-title" id="title"><span class="half">HALF</span><span class="jutsu">JUTSU</span></h1>
+    <svg class="brush" id="brush" viewBox="0 0 600 40" preserveAspectRatio="none"><path d="M6 26 C 120 8, 260 34, 380 18 S 560 14, 594 22"/></svg>
+    <div class="intro-sub" id="sub">The art of changing who's in the shot</div>
+    <div class="slash" id="slash"></div>
+  </div>
+  <div class="curtain top" id="curtain-top"></div>
+  <div class="curtain bottom" id="curtain-bottom"></div>
+  <button class="skip" id="skip">Skip intro ↵</button>
+</div>
+
+<!-- ============================ APP ============================ -->
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<header class="top">
+  <div class="brand"><span class="mark">半</span><span>HALF<b>JUTSU</b></span></div>
+  <div class="sys" id="sys"><span class="dot"></span><span id="sys-text">Checking GPU…</span></div>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="kicker reveal-up">CHARACTER REPLACEMENT · 100% LOCAL</p>
+    <h2>
+      <span class="mask"><span class="line">Swap the person.</span></span>
+      <span class="mask"><span class="line"><em>Keep the shot.</em></span></span>
+    </h2>
+    <p class="lead reveal-up">Edit a single frame with your favourite image tool. Viggle-Animate carries it through the whole video, following every gesture and every camera move.</p>
+  </section>
+
+  <form id="job" class="workspace" autocomplete="off">
+    <div class="col steps">
+      <article class="card tilt" data-step="1">
+        <header><span class="num">01</span><h3>Source video</h3><span class="state" id="s1"><svg class="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><b>pending</b></span></header>
+        <label class="drop" id="drop-video">
+          <input type="file" name="video" accept="video/*" id="video" required>
+          <div class="drop-empty"><div class="drop-icon">▶</div><p><b>Drop your video</b> or click to browse</p><small>One continuous shot works best</small></div>
+          <video id="video-preview" muted playsinline loop hidden></video>
+          <span class="ripple"></span>
+        </label>
+        <div class="meta" id="video-meta"></div>
+      </article>
+
+      <article class="card tilt" data-step="2">
+        <header><span class="num">02</span><h3>Frame to edit</h3><span class="state" id="s2"><svg class="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><b>pending</b></span></header>
+        <p class="hint">Pick the clearest frame (face visible, ideally facing camera), download it and, in your editor, put your character in place of the person: <b>same pose, same framing, same background</b>. That frame defines the look of the entire video.</p>
+        <div class="frame-row">
+          <canvas id="first-frame" class="thumb" hidden></canvas>
+          <button type="button" class="btn ghost magnetic" id="grab" disabled>⤓ Download this frame</button>
+        </div>
+        <div class="frame-pick" id="frame-pick" hidden>
+          <label class="slider">Frame at <output id="frame-out">0.00 s</output>
+            <input type="range" id="frame-at" min="0" max="0" step="1" value="0"></label>
+          <div class="tc-row">
+            <button type="button" class="btn tiny" id="frame-prev" title="Previous frame">◀</button>
+            <input type="text" id="frame-tc" value="0:00:00:00" spellcheck="false" title="Timecode h:mm:ss:ff at 24 fps, as in Photoshop. Also accepts 2:19 or 2.79">
+            <button type="button" class="btn tiny" id="frame-next" title="Next frame">▶</button>
+          </div>
+          <p class="tc-hint">Type the Photoshop timecode (e.g. <b>0:00:02:19</b> or <b>2:19</b>) · 24 fps · ←/→ step one frame</p>
+        </div>
+        <video id="frame-src" muted playsinline preload="auto" hidden></video>
+      </article>
+
+      <article class="card tilt" data-step="3">
+        <header><span class="num">03</span><h3>Edited frame</h3><span class="state" id="s3"><svg class="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><b>pending</b></span></header>
+        <label class="drop small" id="drop-frame">
+          <input type="file" name="edited_frame" accept="image/*" id="edited" required>
+          <div class="drop-empty"><div class="drop-icon">✦</div><p><b>Upload the edited frame</b></p><small>PNG or JPG · fitted to the canvas without distortion</small></div>
+          <div class="wipe" id="wipe" hidden>
+            <canvas id="cmp-before"></canvas>
+            <img id="cmp-after" alt="Edited frame">
+            <div class="wipe-handle" id="wipe-handle"><span>⟷</span></div>
+            <em class="tag-l">Original</em><em class="tag-r">Edited</em>
+          </div>
+          <span class="ripple"></span>
+        </label>
+      </article>
+    </div>
+
+    <aside class="col params card">
+      <header><span class="num">⚙</span><h3>Viggle settings</h3></header>
+
+      <div class="field">
+        <span class="label">Quality</span>
+        <div class="seg" data-name="steps"><span class="pill"></span>
+          <button type="button" data-value="3" class="on">Fast<small>3 steps · recommended</small></button>
+          <button type="button" data-value="4">Balanced<small>4 steps</small></button>
+          <button type="button" data-value="6">Detail<small>6 steps</small></button>
+        </div>
+        <input type="hidden" name="steps" value="3">
+      </div>
+
+      <div class="field">
+        <span class="label">Resolution</span>
+        <div class="seg" data-name="resolution"><span class="pill"></span>
+          <button type="button" data-value="720p" class="on">720p<small>best quality</small></button>
+          <button type="button" data-value="480p">480p<small>quick tests</small></button>
+        </div>
+        <input type="hidden" name="resolution" value="720p">
+      </div>
+
+      <div class="field">
+        <span class="label">Time <em id="time-label">full video</em></span>
+        <div class="timebar" id="timebar"><div class="tb-range" id="tb-range"></div></div>
+        <div class="range2">
+          <label>Start <output id="start-out">0.0 s</output><input type="range" id="start" name="start_seconds" min="0" max="0" step="0.1" value="0"></label>
+          <label>Length <output id="dur-out">—</output><input type="range" id="duration" min="2" max="2" step="0.1" value="2"></label>
+        </div>
+        <input type="hidden" name="duration_seconds" id="duration-field" value="">
+      </div>
+
+      <details class="adv">
+        <summary>Advanced settings</summary>
+        <div class="adv-body">
+          <label class="slider">Flow shift <output id="shift-out">3.0</output>
+            <input type="range" name="flow_shift" id="shift" min="1" max="8" step="0.5" value="3"></label>
+          <label class="slider">Window (frames) <output id="win-out">124</output>
+            <input type="range" name="window_frames" id="win" min="49" max="124" step="1" value="124"></label>
+          <label class="slider">Window overlap <output id="ov-out">18</output>
+            <input type="range" name="window_overlap" id="ov" min="5" max="30" step="1" value="18"></label>
+          <label class="select">Solver
+            <select name="sample_solver"><option value="euler" selected>Euler (default)</option><option value="dpm++">DPM++</option><option value="unipc">UniPC</option></select></label>
+          <label class="select">Seed
+            <span class="seed"><input type="number" name="seed" id="seed" value="0" min="0"><button type="button" class="btn tiny" id="dice" title="Random seed">🎲</button></span></label>
+          <label class="toggle"><input type="checkbox" id="audio" checked><span></span>Keep the original audio</label>
+          <input type="hidden" name="preserve_audio" id="audio-field" value="true">
+          <label class="toggle"><input type="checkbox" id="lipsync" checked><span></span>Lip sync from the soundtrack</label>
+          <input type="hidden" name="lip_sync" id="lipsync-field" value="true">
+          <p class="note">Viggle is distilled for 3 steps, Euler and shift 3. Big changes can hurt the result: try them on short ranges first.</p>
+        </div>
+      </details>
+
+      <div class="estimate"><span>Estimate</span><b id="eta-est">—</b><small id="eta-detail">choose a video</small></div>
+      <button class="btn primary magnetic" id="submit" disabled><span>Generate video</span><i class="shine"></i></button>
+    </aside>
+  </form>
+
+  <!-- ============================ PROGRESS ============================ -->
+  <section id="run" class="run" hidden>
+    <div class="run-head">
+      <div>
+        <p class="kicker" id="run-kicker">RENDERING</p>
+        <h2 id="run-phase" class="phase-text">Preparing…</h2>
+      </div>
+      <div class="big-pct" id="big-pct"><span class="odo" id="pct">0</span><small>%</small></div>
+    </div>
+
+    <div class="track" id="track">
+      <div class="fill" id="fill"><span class="head"></span></div>
+      <div class="milestones"><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i></div>
+      <div class="runner" id="runner"></div>
+      <div class="dust" id="dust"></div>
+    </div>
+
+    <ol class="timeline" id="timeline">
+      <li data-k="prep"><span>Prepare</span></li><li data-k="load"><span>Load model</span></li><li data-k="gen"><span>Generate windows</span></li><li data-k="mux"><span>Audio & length</span></li><li data-k="done"><span>Done</span></li>
+    </ol>
+
+    <div class="run-grid">
+      <div class="panel">
+        <h4>Windows</h4>
+        <div class="windows" id="windows"></div>
+        <h4>Steps in current window</h4>
+        <div class="stepdots" id="stepdots"></div>
+        <div class="kv"><span>Frames</span><b id="kv-frames">—</b><span>Canvas</span><b id="kv-canvas">—</b></div>
+      </div>
+      <div class="panel">
+        <h4>Time</h4>
+        <div class="clock"><div><small>Elapsed</small><b id="elapsed">0:00</b></div><div><small>Remaining</small><b id="remaining">—</b></div></div>
+        <h4>Your machine, live</h4>
+        <div class="meter"><span>VRAM</span><div class="bar"><i id="m-vram"></i></div><b id="t-vram">—</b></div>
+        <div class="meter"><span>GPU</span><div class="bar"><i id="m-gpu"></i></div><b id="t-gpu">—</b></div>
+        <div class="meter"><span>Free RAM</span><div class="bar"><i id="m-ram"></i></div><b id="t-ram">—</b></div>
+        <div class="spark"><svg id="spark" viewBox="0 0 200 40" preserveAspectRatio="none"><path id="spark-line"/></svg><small>GPU load, last 2 min</small></div>
+      </div>
+      <div class="panel log-panel">
+        <h4>What it's doing</h4>
+        <div class="log" id="log"></div>
+        <p class="tip" id="tip"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ RESULT ============================ -->
+  <section id="done" class="done" hidden>
+    <canvas class="confetti" id="confetti"></canvas>
+    <div class="run-head"><div><p class="kicker">RENDER COMPLETE</p><h2>Your shot, with a new lead</h2></div><div class="badge" id="done-time"></div></div>
+    <div class="result-wipe" id="result-wipe">
+      <video id="out-src" muted playsinline></video>
+      <video id="out-res" playsinline></video>
+      <div class="wipe-handle" id="res-handle"><span>⟷</span></div>
+      <em class="tag-l">Original</em><em class="tag-r">Halfjutsu</em>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn ghost magnetic" id="sync">▶ Play both</button>
+      <a class="btn primary magnetic" id="download" download><span>⤓ Download MP4</span><i class="shine"></i></a>
+      <button type="button" class="btn ghost magnetic" id="again">↺ New render</button>
+    </div>
+  </section>
+
+  <section id="fail" class="fail" hidden>
+    <h2>The render stopped</h2><p id="fail-msg"></p><button type="button" class="btn ghost" id="retry">Back</button>
+  </section>
+</main>
+
+<footer>Halfjourney Lab 2026 · powered by Claude</footer>
+
+<template id="ninja-tpl">
+  <svg class="ninja" viewBox="0 0 120 140">
+    <g class="n-all">
+      <g class="n-tails"><path class="tail t1" d="M70 28 q20 -8 34 2"/><path class="tail t2" d="M70 31 q18 2 30 14"/></g>
+      <g class="n-legs"><path class="limb leg l1" d="M54 86 l-6 26"/><path class="limb leg l2" d="M66 86 l8 24"/></g>
+      <path class="ink torso" d="M47 48 q13 -5 26 0 l5 34 q-18 7 -36 0 z"/>
+      <path class="belt" d="M44 74 h32"/>
+      <g class="n-arms"><path class="limb arm a1" d="M50 54 l-18 14"/><path class="limb arm a2" d="M70 54 l18 -12"/></g>
+      <path class="blade" d="M86 44 l22 -24"/>
+      <circle cx="60" cy="32" r="15" class="ink head"/>
+      <rect x="45" y="26" width="30" height="7" rx="3.5" class="band"/>
+      <rect x="50" y="31" width="20" height="5" rx="2.5" class="eyes"/>
+    </g>
+  </svg>
+</template>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

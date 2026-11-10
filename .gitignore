@@ -1,0 +1,25 @@
+# Installed by install.bat (never commit)
+vendor/
+.venv-wangp/
+.venv*/
+
+# Jobs, uploads, renders, downloaded weights markers
+data/
+
+# Python
+__pycache__/
+*.pyc
+
+# Media (keep user footage out of the repo)
+*.mp4
+*.mov
+*.webm
+*.wav
+*.safetensors
+*.gguf
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
