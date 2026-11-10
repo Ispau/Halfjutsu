@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----------------------------------------------------------------------------
-This licence covers only the code in this repository. It does NOT cover:
-  * WanGP, downloaded by install.bat (WanGP Community License), or
-  * the Viggle-Animate / MiniMax H3 model weights (their own licence, with
-    regional restrictions; see the model page on Hugging Face).
