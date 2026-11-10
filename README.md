@@ -7,6 +7,8 @@ the person. Halfjutsu carries that edit through the whole clip with
 camera move and (optionally) the mouth movement of the soundtrack. Everything runs on your
 own PC: no cloud, no uploads.
 
+![Halfjutsu main screen: source video, frame to edit and Viggle settings](docs/images/form.png)
+
 > Tested on **one** configuration: Windows 11, RTX 5080 16 GB, 32 GB RAM. Other 16 GB+
 > NVIDIA cards (4080, 4090, 5090, …) should work but have not been tested.
 
@@ -60,6 +62,9 @@ Start **Halfjutsu** (desktop icon or `start_halfjutsu.bat`). Your browser opens
 5. Watch the live progress (windows, steps, VRAM, ETA). Download the result when it ends.
    You can close the tab: reopening the page reconnects to the running job.
 
+![Live progress of a 64 s render: chunks, steps, elapsed and remaining time, VRAM and GPU load](docs/images/progress.png)
+<sub>Progress screen of a long render (values simulated for the screenshot).</sub>
+
 ### Which videos work (and which don't)
 
 Viggle propagates **one** edited frame; anything not in that frame is improvised. Avoid:
@@ -76,6 +81,8 @@ Works best: one continuous shot, one clearly visible person, steady light, no ov
 ### Settings
 
 The defaults are the recommended values (they match Viggle's official recipe).
+
+<img src="docs/images/settings.png" alt="Settings panel with quality, resolution, time range and advanced options" width="720">
 
 | Setting | Default | Notes |
 |---|---|---|

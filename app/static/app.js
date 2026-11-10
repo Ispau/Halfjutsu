@@ -385,7 +385,7 @@ $('#job').addEventListener('submit', async (e) => {
 /* ================================================================ PROGRESS */
 const TIPS = [
   'Viggle carries your edited frame through the whole video: the look comes from that image, the motion from your footage.',
-  'Each window covers up to 124 frames and shares 18 with the previous one, so the joins stay invisible.',
+  'Long clips are made of independent 5.2 s chunks, all from your edited frame, joined with a hard cut where they match best: no drift.',
   'Viggle is distilled: 3 steps per window get what other models need 20+ steps for.',
   'Everything happens on your RTX 5080 — not a single frame leaves your machine.',
   'The original audio is trimmed and re-attached at the end, in sync with your range.',

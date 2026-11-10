@@ -320,7 +320,7 @@ select, input[type=number] { width: 100%; background: var(--bg-2); color: var(--
 .win.now { border-color: var(--accent); color: var(--text); animation: glow 1.4s ease-in-out infinite; }
 .win.fin { color: var(--bg); border-color: rgba(124,255,178,.5); }
 .win.fin i { height: 100% !important; background: var(--good); }
-.win.fin i::before { display: none; }
+.win.fin i::before, .win:not(.now) i::before { display: none; }
 .win.fin span { animation: popIn .5s var(--spring); }
 @keyframes popIn { from { transform: scale(0); } }
 @keyframes glow { 50% { box-shadow: 0 0 18px rgba(255, 61, 46, .6); } }
